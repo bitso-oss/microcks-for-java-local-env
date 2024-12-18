@@ -1,0 +1,19 @@
+# nonk8s
+apiVersion: mocks.microcks.io/v1alpha1
+kind: APIMetadata
+metadata:
+  name: com.bitso.demo.balance.v1.BalanceServiceV1
+  version: v1
+operations:
+  Get:
+    delay: 100
+    dispatcher: JSON_BODY
+    dispatcherRules: |-
+      {
+        "exp": "/payload/userId",
+        "operator": "equals",
+        "cases": {
+          "123": "Failure",
+          "default": "Success"
+        }
+      }

@@ -1,0 +1,34 @@
+# nonk8s
+apiVersion: mocks.microcks.io/v1alpha1
+kind: APIExamples
+metadata:
+  name: com.bitso.demo.balance.v1.BalanceServiceV1
+  version: v1
+operations:
+  Get:
+    Success:
+      request:
+      response:
+        body: |-
+          {
+            "payload": {
+              "user": {
+                "user_id": "{{ request.body/payload/userId }}",
+                "asset_balances": [
+                  {
+                    "asset": "mxn",
+                    "balance": "{{ randomInt(1, 1000000) }}"
+                  },
+                  {
+                    "asset": "btc",
+                    "balance": "{{ randomInt(1, 1000000) }}"
+                  }
+                ]
+              }
+            }
+          }
+    Failure:
+      request:
+      response:
+        status: 9
+        body: { }

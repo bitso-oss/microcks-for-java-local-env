@@ -1,0 +1,18 @@
+services:
+  grpc-mocks:
+    image: quay.io/microcks/microcks-uber:nightly
+    ports:
+      - '9081:8080' # Admin UI http://localhost:9081/
+      - '9201:9090' # gRPC port
+
+  grpc-mocks-importer:
+    depends_on:
+      - grpc-mocks
+    restart: on-failure
+    image: quay.io/microcks/microcks-cli:0.5.6
+    volumes:
+      - ./services/home-screen-bff/build/extracted-protos/main:/resources/protos
+      - ./services/home-screen-bff/src/test/resources/microcks:/resources/api-examples
+    entrypoint: >
+      bash -c "microcks-cli import '/resources/protos/com/bitso/demo/balance/v1/balance_service_v1.proto:true,/resources/api-examples/balance-service/balance-service-api-examples.yaml:false,/resources/api-examples/balance-service/balance-service-api-metadata.yaml:false' --microcksURL=http://grpc-mocks:8080/api --insecure --keycloakClientId=foo --keycloakClientSecret=bar
+      && microcks-cli import '/resources/protos/com/bitso/demo/trade/v1/trade_service_v1.proto:true,/resources/api-examples/trade-service/trade-service-api-examples.yaml:false' --microcksURL=http://grpc-mocks:8080/api --insecure --keycloakClientId=foo --keycloakClientSecret=bar"

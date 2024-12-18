@@ -1,0 +1,6 @@
+rootProject.name = 'microcks-for-java-local-env'
+
+include 'services:home-screen-bff'
+include 'libs:home-screen-bff-protos'
+include 'libs:trade-service-protos'
+include 'libs:balance-service-protos'

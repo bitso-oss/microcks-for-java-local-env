@@ -1,0 +1,23 @@
+# nonk8s
+apiVersion: mocks.microcks.io/v1alpha1
+kind: APIExamples
+metadata:
+  name: com.bitso.demo.trade.v1.TradeServiceV1
+  version: v1
+operations:
+  Quote:
+    Success:
+      request:
+      response:
+        body: |-
+          {
+            "payload": {
+              "asset": "{{ request.body/payload/toAsset }}",
+              "value": "{{ randomInt(1, 1000000) }}"
+            }
+          }
+    Failure:
+      request:
+      response:
+        status: 9
+        body: { }

@@ -1,0 +1,24 @@
+syntax = "proto3";
+package com.bitso.demo.trade.v1;
+
+service TradeServiceV1 {
+  rpc Quote (AssetQuoteMessage) returns (AssetQuoteResponseMessage) {}
+}
+
+message AssetQuoteMessage {
+  message AssetQuotePayload {
+    int64 from_value = 1;
+    string from_asset = 2;
+    string to_asset = 3;
+  }
+
+  AssetQuotePayload payload = 1;
+}
+
+message AssetQuoteResponseMessage {
+  message AssetQuoteResponsePayload {
+    string asset = 1;
+    int64 value = 2;
+  }
+  AssetQuoteResponsePayload payload = 1;
+}
