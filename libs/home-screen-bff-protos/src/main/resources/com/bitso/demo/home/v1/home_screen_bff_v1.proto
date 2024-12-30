@@ -1,0 +1,31 @@
+syntax = "proto3";
+package com.bitso.demo.home.v1;
+
+service HomeScreenBffV1 {
+  rpc Summary(SummaryMessage) returns (SummaryResponseMessage) {}
+}
+
+message SummaryMessage {
+  message SummaryMessagePayload {
+    int32 user_id = 1;
+  }
+  SummaryMessagePayload payload = 1;
+}
+
+message SummaryResponseMessage {
+  message SummaryResponsePayload {
+    User user = 1;
+  }
+  SummaryResponsePayload payload = 1;
+}
+
+message User {
+  int32 user_id = 1;
+  AssetBalance total_balance = 2;
+  repeated AssetBalance asset_balances = 3;
+}
+
+message AssetBalance {
+  string asset = 1;
+  int64 balance = 2;
+}

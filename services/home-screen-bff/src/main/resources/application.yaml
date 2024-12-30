@@ -1,0 +1,13 @@
+spring.application.name: home-screen-bff
+
+grpc:
+  server:
+    port: 8201
+    reflection-service-enabled: ${GRPC_REFLECTION_SERVICE_ENABLED:true}
+  client:
+    trade-service:
+      address: static://${TRADE_SERVICE_HOST:localhost}:${TRADE_SERVICE_GRPC_PORT:9201}
+      negotiation-type: PLAINTEXT
+    balance-service:
+      address: static://${BALANCE_SERVICE_HOST:localhost}:${BALANCE_SERVICE_GRPC_PORT:9201}
+      negotiation-type: PLAINTEXT

@@ -1,0 +1,31 @@
+syntax = "proto3";
+package com.bitso.demo.balance.v1;
+
+service BalanceServiceV1 {
+  rpc Get (GetBalanceMessage) returns (GetBalanceResponseMessage) {}
+}
+
+message GetBalanceMessage {
+  message GetBalancePayload {
+    int32 user_id = 1;
+  }
+
+  GetBalancePayload payload = 1;
+}
+
+message GetBalanceResponseMessage {
+  message GetBalanceResponsePayload {
+    User user = 1;
+  }
+  GetBalanceResponsePayload payload = 1;
+}
+
+message User {
+  int32 user_id = 1;
+  repeated AssetBalance asset_balances = 2;
+}
+
+message AssetBalance {
+  string asset = 1;
+  int64 balance = 2;
+}

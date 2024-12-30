@@ -1,0 +1,19 @@
+# nonk8s
+apiVersion: mocks.microcks.io/v1alpha1
+kind: APIMetadata
+metadata:
+  name: com.bitso.demo.trade.v1.TradeServiceV1
+  version: v1
+operations:
+  Quote:
+    delay: 100
+    dispatcher: JSON_BODY
+    dispatcherRules: |-
+      {
+        "exp": "/payload/toAsset",
+        "operator": "equals",
+        "cases": {
+          "XRP": "Failure",
+          "default": "Success"
+        }
+      }

@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    group = 'com.bitso.demo'
+    version = '0.0.1'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

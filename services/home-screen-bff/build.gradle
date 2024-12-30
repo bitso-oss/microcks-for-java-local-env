@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.6'
+    id 'com.google.protobuf' version '0.9.4'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // gRPC dependencies
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'com.google.protobuf:protobuf-java:4.29.1'
+    implementation 'io.grpc:grpc-stub:1.68.2'
+    implementation 'io.grpc:grpc-protobuf:1.68.2'
+    implementation 'io.grpc:grpc-core:1.68.2'
+    implementation 'net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE'
+    implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
+
+    // Protobuf definition from dependencies
+    protobuf project(':libs:home-screen-bff-protos')
+    protobuf project(':libs:trade-service-protos')
+    protobuf project(':libs:balance-service-protos')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:4.29.1'
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.68.2'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'annotate_code'
+                }
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/java'
+            srcDirs 'build/generated/source/proto/main/grpc'
+        }
+    }
+}
