@@ -15,4 +15,4 @@ services:
       - ./services/home-screen-bff/src/test/resources/microcks:/resources/api-examples
     entrypoint: >
       bash -c "microcks-cli import '/resources/protos/com/bitso/demo/balance/v1/balance_service_v1.proto:true,/resources/api-examples/balance-service/balance-service-api-examples.yaml:false,/resources/api-examples/balance-service/balance-service-api-metadata.yaml:false' --microcksURL=http://grpc-mocks:8080/api --insecure --keycloakClientId=foo --keycloakClientSecret=bar
-      && microcks-cli import '/resources/protos/com/bitso/demo/trade/v1/trade_service_v1.proto:true,/resources/api-examples/trade-service/trade-service-api-examples.yaml:false' --microcksURL=http://grpc-mocks:8080/api --insecure --keycloakClientId=foo --keycloakClientSecret=bar"
+      && microcks-cli import '/resources/protos/com/bitso/demo/trade/v1/trade_service_v1.proto:true,/resources/api-examples/trade-service/trade-service-api-examples.yaml:false,/resources/api-examples/trade-service/trade-service-api-metadata.yaml:false' --microcksURL=http://grpc-mocks:8080/api --insecure --keycloakClientId=foo --keycloakClientSecret=bar"

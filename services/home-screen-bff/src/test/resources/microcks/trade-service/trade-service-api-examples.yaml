@@ -2,13 +2,13 @@
 apiVersion: mocks.microcks.io/v1alpha1
 kind: APIExamples
 metadata:
-  name: com.bitso.demo.trade.v1.TradeServiceV1
+  name: com.bitso.demo.trade.v1.TradeServiceV1 # the fully qualified name of the gRPC service
   version: v1
 operations:
-  Quote:
-    Success:
-      request:
-      response:
+  Quote: # the gRPC endpoint
+    Success: # an identifier of this request, which can later be used by the dispatching rules
+      request: # we use dispatching rules, so defining the request is unnecessary
+      response: # gRPC messages as json objects
         body: |-
           {
             "payload": {
@@ -16,8 +16,8 @@ operations:
               "value": "{{ randomInt(1, 1000000) }}"
             }
           }
-    Failure:
+    Failure: # a second identifier
       request:
       response:
-        status: 9
-        body: { }
+        status: 9 # responding gRPC error FAILED_PRECONDITION
+        body: { } # body is ignored

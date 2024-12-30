@@ -46,6 +46,6 @@ grpcurl --plaintext \
 ```shell
 grpcurl --plaintext \
     --proto ./libs/trade-service-protos/src/main/resources/com/bitso/demo/trade/v1/trade_service_v1.proto \
-    -d '{"payload": {"from_value": "1234", "from_asset": "btc", "to_asset": "mxn"}}' \
+    -d '{"payload": {"from_value": "1234", "from_asset": "BTC", "to_asset": "MXN"}}' \
     localhost:9201 com.bitso.demo.trade.v1.TradeServiceV1/Quote
 ```
