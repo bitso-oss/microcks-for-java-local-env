@@ -1,6 +1,6 @@
 services:
   grpc-mocks:
-    image: quay.io/microcks/microcks-uber:nightly
+    image: quay.io/microcks/microcks-uber:1.11.0
     ports:
       - '9081:8080' # Admin UI http://localhost:9081/
       - '9201:9090' # gRPC port
